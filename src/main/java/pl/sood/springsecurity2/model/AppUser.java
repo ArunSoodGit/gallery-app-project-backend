@@ -22,7 +22,15 @@ public class AppUser implements UserDetails {
     private String password;
     private String role;
 
+    public AppUser( String username, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
+    public AppUser() {
+    }
 
     public Long getId() {
         return id;
