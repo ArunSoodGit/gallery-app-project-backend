@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AppUserRepo appUserRepo) {
+    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService,AppUserRepo appUserRepo) {
         this.appUserRepo = appUserRepo;
         this.userDetailsService = userDetailsService;
     }
@@ -46,5 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().defaultSuccessUrl("/hello");
     }
 
-
+    @EventListener(ApplicationReadyEvent.class)
+    public void get() {
+        AppUser appUser1 = new AppUser("user", getPasswordEncoder().encode("user"), "USER");
+        AppUser appUser = new AppUser("admin", getPasswordEncoder().encode("admin"), "ADMIN");
+        appUserRepo.save(appUser1);
+        appUserRepo.save(appUser);
+    }
 }
