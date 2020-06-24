@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/**").authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/hello");
+                .formLogin().defaultSuccessUrl("/new-image");
     }
 
     @EventListener(ApplicationReadyEvent.class)

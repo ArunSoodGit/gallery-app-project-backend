@@ -28,6 +28,11 @@ public class ImageController {
 
         return "upload-image";
     }
+    @GetMapping("/index")
+    public String getIndex() {
+
+        return "index";
+    }
 
     @PostMapping("/upload-image")
     public String uploadImage(File file) {
