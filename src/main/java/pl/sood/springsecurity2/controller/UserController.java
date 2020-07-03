@@ -1,5 +1,6 @@
 package pl.sood.springsecurity2.controller;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,8 @@ import pl.sood.springsecurity2.service.UserService;
 
 import java.security.Principal;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private UserService userService;
     private AppUserRepo appUserRepo;
@@ -23,23 +25,19 @@ public class UserController {
 
 
 
-    @GetMapping("/hello")
-    public String hello(Principal principal, Model model) {
-        model.addAttribute("name", principal.getName());
-    //    Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
-      //  Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
-       // model.addAttribute("authorities", authorities);
-      //  model.addAttribute("details", details);
-        return "hello";
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new AppUser());
+     return "zalogowano";
     }
 
     @GetMapping("/sing-up")
     public String singup(Model model) {
-        model.addAttribute("user", new AppUser());
+
         return "sing-up";
     }
 
-    @PostMapping("/register")
+    @GetMapping("/register")
     public String register(AppUser appUser) {
        userService.addUser(appUser);
         return "sing-up";
