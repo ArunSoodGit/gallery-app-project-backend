@@ -24,24 +24,12 @@ public class UserController {
     }
 
 
-
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("user", new AppUser());
-     return "zalogowano";
+        return "zalogowano";
     }
 
-    @GetMapping("/sing-up")
-    public String singup(Model model) {
-
-        return "sing-up";
-    }
-
-    @GetMapping("/register")
-    public String register(AppUser appUser) {
-       userService.addUser(appUser);
-        return "sing-up";
-    }
 
 
 }
