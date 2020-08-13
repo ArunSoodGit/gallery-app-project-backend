@@ -13,12 +13,14 @@ public class Image {
     private Long id;
     private String imageUrl;
 
+
     public Image() {
     }
 
-    public Image( String imageuUrl) {
+    public Image(String imageUrl) {
         this.id = id;
-        this.imageUrl = imageuUrl;
+        this.imageUrl = imageUrl;
+
     }
 
     public Long getId() {
@@ -29,11 +31,13 @@ public class Image {
         this.id = id;
     }
 
-    public String getImageuUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageuUrl(String imageuUrl) {
-        this.imageUrl = imageuUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
+
+
 }

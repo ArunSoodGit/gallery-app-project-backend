@@ -1,35 +1,24 @@
 package pl.sood.springsecurity2.controller;
-
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.sood.springsecurity2.model.AppUser;
 import pl.sood.springsecurity2.repository.AppUserRepo;
-import pl.sood.springsecurity2.service.UserService;
-
 import java.security.Principal;
 
+
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
-    private UserService userService;
+
     private AppUserRepo appUserRepo;
 
+    public UserController(AppUserRepo appUserRepo) {
 
-    public UserController(UserService userService, AppUserRepo appUserRepo) {
-        this.userService = userService;
         this.appUserRepo = appUserRepo;
-
     }
-
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new AppUser());
-        return "zalogowano";
+    public Principal user(Principal user) {
+        return user;
     }
-
 
 
 }

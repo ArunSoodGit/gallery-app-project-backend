@@ -44,10 +44,6 @@ public class ImageUploaderService {
         imageRepo.save(new Image(path));
     }
 
-    public void getImages() {
-
-    }
-
 
 }
 

@@ -1,20 +1,17 @@
 package pl.sood.springsecurity2.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.sood.springsecurity2.model.Image;
 import pl.sood.springsecurity2.repository.ImageRepo;
 import pl.sood.springsecurity2.service.ImageUploaderService;
 
-import java.io.Console;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins="*", maxAge=3600)
 @RestController
 public class ImageController {
 
