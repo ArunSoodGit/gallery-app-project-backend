@@ -9,17 +9,18 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Entity
-
 public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
     private String password;
     private String role;
 
     public AppUser(String username, String password, String role) {
+
         this.id = id;
         this.username = username;
         this.password = password;

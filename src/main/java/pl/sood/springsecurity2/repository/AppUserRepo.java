@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface AppUserRepo extends JpaRepository<AppUser, Long> {
 
-    Optional<AppUser> findByUsername(String username);
-
+    Optional<AppUser> findByUsername(String username); //pojemnik na zmienną dowolnego typu, która może mieć wartość null
 
 }

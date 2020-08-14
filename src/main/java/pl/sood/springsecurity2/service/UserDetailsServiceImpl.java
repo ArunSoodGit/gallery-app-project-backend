@@ -1,5 +1,6 @@
 package pl.sood.springsecurity2.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,13 +12,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private AppUserRepo appUserRepo;
 
+    @Autowired
     public UserDetailsServiceImpl(AppUserRepo appUserRepo) {
         this.appUserRepo = appUserRepo;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        return appUserRepo.findByUsername(s).get();
+        return appUserRepo.findByUsername(username).orElseThrow(NullPointerException::new); /// zmiana exception
     }
 }

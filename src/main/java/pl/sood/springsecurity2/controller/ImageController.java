@@ -11,7 +11,7 @@ import pl.sood.springsecurity2.service.ImageUploaderService;
 import java.io.IOException;
 import java.util.List;
 
-@CrossOrigin(origins="*", maxAge=3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class ImageController {
 
@@ -23,7 +23,6 @@ public class ImageController {
         this.imageRepo = imageRepo;
         this.imageUploaderService = imageUploaderService;
     }
-
 
     @PostMapping("/upload-image")
     public void uploadImage2(@RequestParam("file") MultipartFile file) throws IOException {

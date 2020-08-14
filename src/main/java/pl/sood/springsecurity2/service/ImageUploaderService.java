@@ -13,16 +13,17 @@ import java.util.Map;
 
 @Service
 public class ImageUploaderService {
-    Cloudinary cloudinary;
 
+    private Cloudinary cloudinary;
 
     private ImageRepo imageRepo;
 
     @Autowired
     public ImageUploaderService(ImageRepo imageRepo) {
-        this.imageRepo = imageRepo;
-        cloudinary = new Cloudinary(ObjectUtils.asMap(
 
+        this.imageRepo = imageRepo;
+
+        cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "dhha0rwuo",
                 "api_key", "621269339965388",
                 "api_secret", "PwrSWlPpmgssOqy-IjJzzpwAx3k"));
