@@ -21,7 +21,8 @@ public class ImageController {
     private ImageRepo imageRepo;
 
     @Autowired
-    public ImageController(ImageUploaderService imageUploaderService, ImageRepo imageRepo) {
+    public ImageController(ImageUploaderService imageUploaderService, ImageRepo imageRepo, ImageService imageService) {
+        this.imageService = imageService;
         this.imageRepo = imageRepo;
         this.imageUploaderService = imageUploaderService;
     }
@@ -29,25 +30,29 @@ public class ImageController {
     @PostMapping("/upload-image")
     public void uploadImage2(@RequestParam("file") MultipartFile file) throws IOException {
 
-       imageUploaderService.uploadFile(file);
-
+     Map result = imageUploaderService.uploadFile(file);
+        Image image =
+                new Image((String)result.get("original_filename"),
+                        (String)result.get("url"),
+                        (String)result.get("public_id"));
+        imageService.save(image);
 
     }
 
     @GetMapping("/get-images")
     public List<Image> getImages() {
 
-        return imageRepo.findAll();
+        return imageService.getAll();
 
     }
 
     @DeleteMapping("/delete/{id}")
-    public void  delete(@PathVariable("id") Long id)throws IOException {
+    public void delete(@PathVariable("id") Long id) throws IOException {
 
         Image image = imageRepo.getOne(id);
 
-         imageUploaderService.delete(image.getImageId());
+        imageUploaderService.delete(image.getImageId());
+        imageService.delete(id);
 
-        imageRepo.deleteById(id);
     }
 }

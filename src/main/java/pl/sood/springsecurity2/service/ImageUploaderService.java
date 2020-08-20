@@ -35,10 +35,7 @@ public class ImageUploaderService {
         try {
             System.out.println(file.getBytes());
             uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            Image image = new Image((String) uploadResult.get("original_filename"),
-                    (String) uploadResult.get("url"),
-                    (String) uploadResult.get("public_id"));
-            imageRepo.save(image);
+
 
         } catch (IOException e) {
         }
