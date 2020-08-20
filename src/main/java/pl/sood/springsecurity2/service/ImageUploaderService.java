@@ -29,22 +29,32 @@ public class ImageUploaderService {
                 "api_secret", "PwrSWlPpmgssOqy-IjJzzpwAx3k"));
     }
 
-    public String uploadFile(MultipartFile file) {
+    public Map uploadFile(MultipartFile file) {
 
         Map uploadResult = null;
         try {
+            System.out.println(file.getBytes());
             uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            saveUrlToDb(uploadResult.get("url").toString());
+            Image image = new Image((String) uploadResult.get("original_filename"),
+                    (String) uploadResult.get("url"),
+                    (String) uploadResult.get("public_id"));
+            imageRepo.save(image);
+
         } catch (IOException e) {
         }
 
-        return uploadResult.get("url").toString();
+        return uploadResult;
     }
 
-    public void saveUrlToDb(String path) {
-        imageRepo.save(new Image(path));
-    }
+    public Map delete(String id) throws IOException {
 
+        Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
+        return result;
+
+    }
 
 }
+
+
+
 

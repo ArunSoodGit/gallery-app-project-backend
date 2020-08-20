@@ -6,15 +6,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.sood.springsecurity2.model.Image;
 import pl.sood.springsecurity2.repository.ImageRepo;
+import pl.sood.springsecurity2.service.ImageService;
 import pl.sood.springsecurity2.service.ImageUploaderService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class ImageController {
-
+    private ImageService imageService;
     private ImageUploaderService imageUploaderService;
     private ImageRepo imageRepo;
 
@@ -27,7 +29,8 @@ public class ImageController {
     @PostMapping("/upload-image")
     public void uploadImage2(@RequestParam("file") MultipartFile file) throws IOException {
 
-        imageUploaderService.uploadFile(file);
+       imageUploaderService.uploadFile(file);
+
 
     }
 
@@ -36,6 +39,15 @@ public class ImageController {
 
         return imageRepo.findAll();
 
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public void  delete(@PathVariable("id") Long id)throws IOException {
+
+        Image image = imageRepo.getOne(id);
+
+         imageUploaderService.delete(image.getImageId());
+
+        imageRepo.deleteById(id);
     }
 }

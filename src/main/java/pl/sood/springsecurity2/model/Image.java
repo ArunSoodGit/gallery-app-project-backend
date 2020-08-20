@@ -11,18 +11,35 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+    private String name;
     private String imageUrl;
-
+    private String imageId;
 
     public Image() {
     }
 
-    public Image(String imageUrl) {
-        this.id = id;
+    public Image(String name, String imageUrl, String imageId) {
+        this.name = name;
+        this.imageId = imageId;
         this.imageUrl = imageUrl;
-
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
 
     public Long getId() {
         return id;
